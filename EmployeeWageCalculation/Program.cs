@@ -8,34 +8,36 @@ namespace EmployeeWageCalculation
 {
     internal class Program
     {
+        public const int IS_FULL_TIME = 1;
+        public const int IS_PART_TIME = 2;
+        public const int EMP_RATE_PER_HR = 50;
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Employee wage calculation  program");
             Console.ReadLine();
-            //UC2
-            int IS_FULL_TIME = 1;
-            int IS_PART_TIME = 2;
-            int EMP_RATE_PER_HR = 50;
+            //UC4
             int empHrs = 0;
             int empWage = 0;
 
             Random random = new Random();
             int empAttendance = random.Next(0, 3);
-            if (empAttendance == IS_FULL_TIME)
+            switch (empAttendance) 
             {
-                Console.WriteLine("Employee is full time.");
-                empHrs = 8;
+                case IS_FULL_TIME:
+                    Console.WriteLine("Employee is part time.");
+                    empHrs = 8;
+                    break;
+                case IS_PART_TIME:
+                    Console.WriteLine("Employee is absent");
+                    empWage = 4;
+                    break;
+                default:
+                    Console.WriteLine("Employee is absent.");
+                    empHrs = 0;
+                    break;
+            
             }
-            else if (empAttendance == IS_PART_TIME) 
-            {
-                Console.WriteLine("Employee is part time.");
-                empHrs = 4;
-            }
-            else
-            {
-                Console.WriteLine("Employee is absent");
-                empHrs = 0;
-            }
+
             empWage = empHrs * EMP_RATE_PER_HR;
             Console.WriteLine("Employee wage is: {0}", empWage);
             Console.ReadLine();
