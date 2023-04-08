@@ -12,17 +12,20 @@ namespace EmployeeWageCalculation
         public const int IS_PART_TIME = 2;
         public const int EMP_RATE_PER_HR = 50;
         public const int MAX_WORK_DAYS_IN_MONTH = 20;
+        public const int MAX_WORKING_HRS_IN_MONTH = 100;
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Employee wage calculation  program");
             Console.ReadLine();
-            //UC5
+            //UC6
             int empHrs = 0;
             int empWage = 0;
-            int totalEmpWage = 0;
+            int totalEmpHrs = 0;
+            int totalWorkDays = 0;
 
-            for (int day = 0; day <= MAX_WORK_DAYS_IN_MONTH; day++)
+            while (totalEmpHrs <= MAX_WORKING_HRS_IN_MONTH  && totalWorkDays < MAX_WORK_DAYS_IN_MONTH)
             {
+                totalWorkDays++;
                 Random random = new Random();
                 int empAttendance = random.Next(0, 3);
                 switch (empAttendance)
@@ -41,11 +44,13 @@ namespace EmployeeWageCalculation
                         break;
 
                 }
-                empWage = empHrs * EMP_RATE_PER_HR;
-                totalEmpWage += empWage;
-                Console.WriteLine("Day: "+day + " Employee wage: " +empWage);
+                totalEmpHrs += empHrs;
+                Console.WriteLine("Day: " + totalWorkDays + "Emp hrs: " + empHrs);
+                Console.WriteLine("Emp work days: "+totalWorkDays);
             }
-            Console.WriteLine("Total emp wage is {0}: ",  totalEmpWage);
+            empWage = totalEmpHrs * EMP_RATE_PER_HR;
+            Console.WriteLine("Total emp wage is {0}: ",  empWage);
+            Console.WriteLine("Emp hrs: " + totalEmpHrs);
             Console.ReadLine();
         }
     }
