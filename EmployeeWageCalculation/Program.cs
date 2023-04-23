@@ -17,13 +17,18 @@ namespace EmployeeWageCalculation
         {
             Console.WriteLine("Welcome to Employee wage calculation  program");
             Console.ReadLine();
-            //UC6
+            Console.WriteLine("Total employee wage is:"+CalculateEmpWage());
+        }
+        //UC7
+        public static int CalculateEmpWage()
+        {
+           
             int empHrs = 0;
             int empWage = 0;
             int totalEmpHrs = 0;
             int totalWorkDays = 0;
 
-            while (totalEmpHrs <= MAX_WORKING_HRS_IN_MONTH  && totalWorkDays < MAX_WORK_DAYS_IN_MONTH)
+            while (totalEmpHrs <= MAX_WORKING_HRS_IN_MONTH && totalWorkDays < MAX_WORK_DAYS_IN_MONTH)
             {
                 totalWorkDays++;
                 Random random = new Random();
@@ -46,12 +51,13 @@ namespace EmployeeWageCalculation
                 }
                 totalEmpHrs += empHrs;
                 Console.WriteLine("Day: " + totalWorkDays + "Emp hrs: " + empHrs);
-                Console.WriteLine("Emp work days: "+totalWorkDays);
+                Console.WriteLine("Emp work days: " + totalWorkDays);
             }
             empWage = totalEmpHrs * EMP_RATE_PER_HR;
-            Console.WriteLine("Total emp wage is {0}: ",  empWage);
-            Console.WriteLine("Emp hrs: " + totalEmpHrs);
-            Console.ReadLine();
+            // Console.WriteLine("Total emp wage is {0}: ", empWage);
+            //Console.WriteLine("Total Emp hrs: " + totalEmpHrs);
+            //Console.ReadLine();
+            return empWage;
         }
     }
 }
