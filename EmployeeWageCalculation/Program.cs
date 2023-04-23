@@ -8,27 +8,36 @@ namespace EmployeeWageCalculation
 {
     internal class Program
     {
-        public const int IS_FULL_TIME = 1;
-        public const int IS_PART_TIME = 2;
-        public const int EMP_RATE_PER_HR = 50;
-        public const int MAX_WORK_DAYS_IN_MONTH = 20;
-        public const int MAX_WORKING_HRS_IN_MONTH = 100;
+        //UC8 Employee wage for multiple comapanies
+        
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Employee wage calculation  program");
             Console.ReadLine();
-            Console.WriteLine("Total employee wage is:"+CalculateEmpWage());
+            for(int i=0; i<3;i++) // takes input for three companies
+            {
+                Console.WriteLine("Enter the company Name: ");
+                string companyName = Console.ReadLine();
+                Console.WriteLine("Enter employee rate per hr");
+                int empRatePerHr = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Enter maximum work days in month");
+                int maxWorkDayInMonth = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Enter maximum work hrs in month");
+                int maxWorkHrInMonth = Convert.ToInt32(Console.ReadLine());
+                CalculateEmpWage(companyName, empRatePerHr, maxWorkDayInMonth, maxWorkHrInMonth);
+            }
+
         }
-        //UC7
-        public static int CalculateEmpWage()
-        {
-           
+        public static int CalculateEmpWage(string company, int empRatePerHr, int maxWorkDaysInMonth, int maxWorkHrsInMonth)
+        {        
             int empHrs = 0;
             int empWage = 0;
             int totalEmpHrs = 0;
             int totalWorkDays = 0;
+            const int IS_FULL_TIME = 1;
+            const int IS_PART_TIME = 2;
 
-            while (totalEmpHrs <= MAX_WORKING_HRS_IN_MONTH && totalWorkDays < MAX_WORK_DAYS_IN_MONTH)
+            while (totalEmpHrs <= maxWorkHrsInMonth && totalWorkDays < maxWorkDaysInMonth)
             {
                 totalWorkDays++;
                 Random random = new Random();
@@ -36,27 +45,22 @@ namespace EmployeeWageCalculation
                 switch (empAttendance)
                 {
                     case IS_FULL_TIME:
-                        Console.WriteLine("Employee is full time.");
+                       //Console.WriteLine("Employee is full time.");
                         empHrs = 8;
                         break;
                     case IS_PART_TIME:
-                        Console.WriteLine("Employee is part time.");
+                        //Console.WriteLine("Employee is part time.");
                         empHrs = 4;
                         break;
                     default:
-                        Console.WriteLine("Employee is absent.");
+                        //Console.WriteLine("Employee is absent.");
                         empHrs = 0;
                         break;
-
                 }
-                totalEmpHrs += empHrs;
-                Console.WriteLine("Day: " + totalWorkDays + "Emp hrs: " + empHrs);
-                Console.WriteLine("Emp work days: " + totalWorkDays);
+                totalEmpHrs += empHrs;        
             }
-            empWage = totalEmpHrs * EMP_RATE_PER_HR;
-            // Console.WriteLine("Total emp wage is {0}: ", empWage);
-            //Console.WriteLine("Total Emp hrs: " + totalEmpHrs);
-            //Console.ReadLine();
+            empWage = totalEmpHrs * empRatePerHr;
+            Console.WriteLine("Total employee wage for {0} is {1} ", company,empWage);
             return empWage;
         }
     }
